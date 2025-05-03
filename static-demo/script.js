@@ -7,8 +7,14 @@
 let currentMode = 'rich'; // 'rich' or 'legacy'
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialize HyperAV background
+  initHyperAV();
+  
   // Set up mode toggle buttons
   setupModeToggle();
+  
+  // Apply micro-animations to random elements
+  initMicroAnimations();
   
   // Load magazine data (static version)
   setTimeout(() => {
@@ -19,6 +25,51 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }, 1000); // Show loading spinner for 1 second for effect
 });
+
+/**
+ * Initializes the HyperAV background visualization
+ */
+function initHyperAV() {
+  const container = document.getElementById('hyperav-container');
+  if (!container || !window.HyperAVMinimal) return;
+  
+  try {
+    window.hyperAV = new HyperAVMinimal(container, {
+      autoRotate: true,
+      randomizeParams: true,
+      lowDetail: true,
+      opacity: 0.6
+    });
+    
+    // Randomize settings every 30-60 seconds
+    setInterval(() => {
+      if (window.hyperAV) {
+        window.hyperAV.randomizeProjection();
+      }
+    }, Math.random() * 30000 + 30000);
+  } catch (error) {
+    console.error('Failed to initialize HyperAV:', error);
+  }
+}
+
+/**
+ * Initializes micro-animations on content elements
+ */
+function initMicroAnimations() {
+  // Apply glitch effect to random paragraphs
+  document.addEventListener('contentLoaded', () => {
+    // Wait for content to be rendered
+    setTimeout(() => {
+      const paragraphs = document.querySelectorAll('.section-content p, .editorial-content p, .culture-content p, .tech-content p');
+      for (let i = 0; i < paragraphs.length; i++) {
+        if (Math.random() > 0.7) {
+          paragraphs[i].style.animation = `microShift ${2 + Math.random() * 2}s infinite`;
+          paragraphs[i].style.position = 'relative';
+        }
+      }
+    }, 1500);
+  });
+}
 
 /**
  * Sets up the display mode toggle buttons
@@ -407,11 +458,44 @@ function animateSections() {
   sections.forEach((section, index) => {
     section.style.opacity = '0';
     section.style.transform = 'translateY(20px)';
+    
     setTimeout(() => {
       section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
       section.style.opacity = '1';
       section.style.transform = 'translateY(0)';
+      
+      // Apply depth effect to add false sense of holographic depth
+      applyDepthEffect(section);
+      
+      // Dispatch event when content is loaded
+      if (index === sections.length - 1) {
+        const event = new Event('contentLoaded');
+        document.dispatchEvent(event);
+      }
     }, 100 * index);
+  });
+}
+
+/**
+ * Applies a depth effect to create false sense of holographic depth
+ * @param {HTMLElement} element - The element to apply the effect to
+ */
+function applyDepthEffect(element) {
+  const titles = element.querySelectorAll('h2, h3');
+  
+  titles.forEach(title => {
+    // Add depth shadow effect
+    title.style.textShadow = '0 0 8px var(--accent2), 0 0 12px var(--accent1), 0 0 20px var(--primary)';
+    
+    // Add subtle floating animation
+    title.style.animation = 'depthPulse 8s infinite';
+    
+    // Random rotation for some titles
+    if (Math.random() > 0.7) {
+      title.style.transform = `rotateX(${Math.random() * 5 - 2.5}deg) rotateY(${Math.random() * 5 - 2.5}deg)`;
+      title.style.transformStyle = 'preserve-3d';
+      title.style.perspective = '1000px';
+    }
   });
 }
 
