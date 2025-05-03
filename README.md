@@ -66,6 +66,15 @@ MillzMaleficarum_Codex_v0.1/
 
 ## Deployment
 
+### GitHub Pages (Automated with GitHub Actions)
+This repository includes a GitHub Actions workflow that automatically deploys to GitHub Pages:
+
+1. Push the code to your GitHub repository
+2. The GitHub Actions workflow will automatically build and deploy a static version
+3. You can access the deployed site at: https://domusgpt.github.io/millzmaleficarum-codex/
+
+The GitHub Pages version is a static demo that demonstrates the UI and functionality. The dashboard upload functionality won't work in this version since GitHub Pages can only host static content.
+
 ### Azure (Original Target)
 The application is designed to be deployed to Azure App Service with the `/data` directory mounted to Azure Files for persistent storage.
 

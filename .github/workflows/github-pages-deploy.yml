@@ -1,0 +1,233 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v2
+    
+    - name: Setup Node.js 📦
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+    
+    - name: Install Dependencies 🔧
+      run: npm install
+    
+    - name: Create build directory 📁
+      run: |
+        mkdir -p build
+        cp -r public/* build/
+        cp -r data build/
+    
+    - name: Create browser-friendly server 📄
+      run: |
+        cat > build/server.js <<EOL
+        // Browser-friendly version of server code
+        const magazineData = require('./data/current_magazine_data.json');
+        
+        // Legacy format adapter function
+        function adaptToLegacyFormat(data) {
+          return {
+            title: data.title || \`The GEN-R-L MiLLz Manifesto\`,
+            issue: data.issue || \`Issue \${data.issue_number} - \${data.date}\`,
+            theme: data.theme || "vaporwave",
+            sections: [
+              {
+                title: data.sections.cover.title,
+                content: data.sections.cover.blurb,
+                style: "glitched"
+              },
+              {
+                title: data.sections.editorial.title,
+                content: data.sections.editorial.article,
+                style: ""
+              },
+              {
+                title: data.sections.culture.headline,
+                content: data.sections.culture.body,
+                style: ""
+              },
+              {
+                title: data.sections.tech.headline,
+                content: data.sections.tech.body,
+                style: ""
+              },
+              {
+                title: \`Interview with \${data.sections.interview.subject}\`,
+                content: data.sections.interview.q_and_a.map(qa => 
+                  \`<strong>Q: \${qa.Q}</strong><br>\${qa.A}<br><br>\`
+                ).join(''),
+                style: ""
+              },
+              {
+                title: "Advertisements",
+                content: data.sections.ads.map(ad => 
+                  \`<div class="ad"><h4>\${ad.product}</h4><p>\${ad.copy}</p></div>\`
+                ).join(''),
+                style: "centered"
+              },
+              {
+                title: data.sections.lore_serial.chapter,
+                content: data.sections.lore_serial.text,
+                style: ""
+              }
+            ]
+          };
+        }
+        
+        // Expose data globally
+        window.getMagazineData = function(format) {
+          if (format === 'rich') {
+            return magazineData;
+          } else {
+            return adaptToLegacyFormat(magazineData);
+          }
+        };
+        
+        window.getVisualPrompts = function() {
+          if (magazineData.sections && magazineData.sections.visual_prompts) {
+            return { prompts: magazineData.sections.visual_prompts };
+          } else {
+            return { prompts: [] };
+          }
+        };
+        EOL
+      
+    - name: Modify script.js for static version 📝
+      run: |
+        sed -i 's/fetch(url)/{ json: () => Promise.resolve(window.getMagazineData(mode)) }/' build/script.js
+        sed -i 's/const response = await fetch(url);/const response = { ok: true };/' build/script.js
+        sed -i 's/const url = mode === .rich. ? .\/api\/magazine-data?format=rich. : .\/api\/magazine-data.;//' build/script.js
+    
+    - name: Create index.html wrapper 📄
+      run: |
+        mv build/index.html build/magazine.html
+        cat > build/index.html <<EOL
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>The GEN-R-L MiLLz Manifesto</title>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <style>
+                body {
+                    background-color: #000033;
+                    color: #ffffff;
+                    font-family: 'Courier New', monospace;
+                    padding: 2rem;
+                }
+                .jumbotron {
+                    background-color: rgba(0, 0, 60, 0.5);
+                    border: 2px solid #00ffff;
+                    box-shadow: 0 0 20px #ff00ff;
+                    text-align: center;
+                    padding: 2rem;
+                }
+                h1 {
+                    color: #ff00ff;
+                    text-shadow: 3px 3px #00eeff;
+                    font-weight: bold;
+                }
+                .btn-primary {
+                    background-color: #ff00aa;
+                    border-color: #00eeff;
+                }
+                .btn-primary:hover {
+                    background-color: #00eeff;
+                    border-color: #ff00aa;
+                }
+                .card {
+                    background-color: rgba(0, 0, 60, 0.3);
+                    border: 1px solid #ff00aa;
+                    margin-bottom: 1rem;
+                }
+                .card-header {
+                    background-color: rgba(0, 0, 80, 0.5);
+                    color: #00eeff;
+                    border-bottom: 1px solid #ff00aa;
+                }
+                footer {
+                    text-align: center;
+                    margin-top: 2rem;
+                    padding-top: 1rem;
+                    border-top: 1px solid #ff00aa;
+                    color: #00eeff;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="jumbotron">
+                    <h1>The GEN-R-L MiLLz Manifesto</h1>
+                    <p class="lead">A hyperbolic info hagiography with Vaporwave/Cryptic/Sacred Tech aesthetic</p>
+                    <p>
+                        <a href="magazine.html" class="btn btn-primary btn-lg">Enter the Manifesto</a>
+                    </p>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Rich Format Experience</h2>
+                            </div>
+                            <div class="card-body">
+                                <p>Experience the full GEN-R-L MiLLz Manifesto with specialized section rendering, sigil markers, and visual prompts.</p>
+                                <p>The default view shows the modern rich format with enhanced styling and structure.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Legacy Format Support</h2>
+                            </div>
+                            <div class="card-body">
+                                <p>Toggle to the legacy format to see the simplified version with traditional section-based structure.</p>
+                                <p>Use the format toggle buttons at the bottom of the page to switch between views.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2>About This Project</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>The MillzMaleficarum Codex is a dynamic, JSON-driven digital magazine with a Vaporwave/Cryptic/Sacred Tech aesthetic, focused on hyperbolic info hagiography about GEN-R-L MiLLz.</p>
+                        <p>This static demo version showcases the frontend experience with both the rich and legacy format display modes.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <footer>
+                <div class="container">
+                    <p>GEN-R-L MiLLz Manifesto © 2025 | Created by DomusGPT</p>
+                </div>
+            </footer>
+            
+            <script src="data/current_magazine_data.json"></script>
+            <script src="server.js"></script>
+        </body>
+        </html>
+        EOL
+    
+    - name: Fix magazine.html 🔧
+      run: |
+        sed -i 's|<script src="script.js"></script>|<script src="data/current_magazine_data.json"></script>\n    <script src="server.js"></script>\n    <script src="script.js"></script>|' build/magazine.html
+    
+    - name: Deploy to GitHub Pages 🚀
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      with:
+        branch: gh-pages
+        folder: build
