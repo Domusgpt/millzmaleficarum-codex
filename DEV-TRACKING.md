@@ -10,6 +10,7 @@ This file tracks all development changes to the MillzMaleficarum Codex project.
 - **Server Version**: Configured for Fly.io deployment
 - **Last Updated**: May 3, 2025
 - **Fly.io CLI**: Installed at `/root/.fly/bin/flyctl`
+- **HyperAV Integration**: 4D Audio-Reactive Visualizer available at `/storage/emulated/0/MillzMaleficarum_Codex_v0.1/HyperAV/`
 
 ## Development Timeline
 
@@ -91,3 +92,8 @@ This file tracks all development changes to the MillzMaleficarum Codex project.
 - Complete Fly.io deployment
 - Test content upload functionality on deployed server
 - Consider adding authentication to dashboard
+- Implement HyperAV integration for enhanced visual effects:
+  - Add 4D visualization background with randomized parameters
+  - Implement micro-animations and glitchy effects
+  - Create false sense of hyperdimensional holographic depth
+  - See HYPERAV-INTEGRATION.md for technical details

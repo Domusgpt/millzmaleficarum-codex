@@ -5,6 +5,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## IMPORTANT: READ FIRST
 - **ALWAYS CHECK DEV-TRACKING.md** before making any changes to ensure you're aware of the current development status
 - Update DEV-TRACKING.md each time you modify files in this project with detailed notes
+- Review HYPERAV-INTEGRATION.md for plans to integrate the 4D visualizer
+- Run hyperav-sync.sh to synchronize HyperAV files from /storage/emulated/0/MillzMaleficarum_Codex_v0.1/HyperAV/
 
 ## Contact Information
 - Email: phillips.paul.email@gmail.com
