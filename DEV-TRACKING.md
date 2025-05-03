@@ -4,17 +4,31 @@ This file tracks all development changes to the MillzMaleficarum Codex project.
 
 ## Latest Status
 
-- **Current Version**: v0.1
-- **Latest Feature**: Fly.io deployment configuration
+- **Current Version**: v0.2
+- **Latest Feature**: HyperAV integration with micro-animations and hyperdimensional effects
 - **Static Demo Available**: https://domusgpt.github.io/millzmaleficarum-codex/
 - **Server Version**: Configured for Fly.io deployment
 - **Last Updated**: May 3, 2025
 - **Fly.io CLI**: Installed at `/root/.fly/bin/flyctl`
-- **HyperAV Integration**: 4D Audio-Reactive Visualizer available at `/storage/emulated/0/MillzMaleficarum_Codex_v0.1/HyperAV/`
+- **HyperAV Integration**: Implemented in static demo with simplified visualization engine
 
 ## Development Timeline
 
 ### May 3, 2025
+
+#### HyperAV Integration (v0.2)
+- Implemented 4D visualization as background layer
+- Added micro-animations and glitchy effects for UI elements
+- Created false sense of hyperdimensional holographic depth
+- Added randomized background visualization parameters
+- Synchronized HyperAV files from local storage
+- Created simplified version of HyperAV for background effects
+- Enhanced content elements with dynamic effects
+- Files modified:
+  - `static-demo/index.html` - Added HyperAV container div
+  - `static-demo/style.css` - Added new animations and effects 
+  - `static-demo/script.js` - Added HyperAV initialization and depth effects
+  - Created `static-demo/hyperav/` directory with simplified engine
 
 #### Fly.io Deployment Configuration
 - Added `Dockerfile` for containerization
@@ -92,8 +106,8 @@ This file tracks all development changes to the MillzMaleficarum Codex project.
 - Complete Fly.io deployment
 - Test content upload functionality on deployed server
 - Consider adding authentication to dashboard
-- Implement HyperAV integration for enhanced visual effects:
-  - Add 4D visualization background with randomized parameters
-  - Implement micro-animations and glitchy effects
-  - Create false sense of hyperdimensional holographic depth
-  - See HYPERAV-INTEGRATION.md for technical details
+- Enhance HyperAV integration with additional features:
+  - Add direct audio reactivity for immersive experience
+  - Implement more pronounced reality distortion effects
+  - Create interactive elements that respond to user actions
+  - Add custom shaders for improved visual quality
