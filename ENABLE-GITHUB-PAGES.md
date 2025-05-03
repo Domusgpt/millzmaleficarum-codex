@@ -26,7 +26,7 @@ If you don't see the GitHub Actions option, you can:
 
 1. In the Pages settings:
    - For **Source**, select **Deploy from a branch**
-   - For **Branch**, select **master** (or **main**) and folder **/(root)**
+   - For **Branch**, select **master** (or **main**) and folder **/static-demo**
    - Click **Save**
 
 2. Then manually enable the workflow:
