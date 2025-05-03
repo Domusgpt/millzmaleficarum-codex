@@ -1,0 +1,25 @@
+run = "npm start"
+entrypoint = "server.js"
+
+[env]
+PORT = "3000"
+
+[nix]
+channel = "stable-22_11"
+
+[languages]
+[languages.javascript]
+pattern = "**/*.js"
+syntax = "javascript"
+
+[languages.css]
+pattern = "**/*.css"
+syntax = "css"
+
+[languages.html]
+pattern = "**/*.html"
+syntax = "html"
+
+[deployment]
+run = ["sh", "-c", "npm start"]
+deploymentTarget = "cloudrun"
