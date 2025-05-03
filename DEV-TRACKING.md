@@ -9,6 +9,7 @@ This file tracks all development changes to the MillzMaleficarum Codex project.
 - **Static Demo Available**: https://domusgpt.github.io/millzmaleficarum-codex/
 - **Server Version**: Configured for Fly.io deployment
 - **Last Updated**: May 3, 2025
+- **Fly.io CLI**: Installed at `/root/.fly/bin/flyctl`
 
 ## Development Timeline
 
