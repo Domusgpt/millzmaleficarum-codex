@@ -1,6 +1,7 @@
 /**
- * MillzMaleficarum Codex v0.1 - Static Demo
- * Frontend script for the dynamic magazine
+ * MillzMaleficarum Codex v0.2 - Enhanced Edition
+ * Frontend script for the dynamic magazine with hyperdimensional effects
+ * Includes HyperAV integration and advanced visual enhancements
  */
 
 // Track current display mode
