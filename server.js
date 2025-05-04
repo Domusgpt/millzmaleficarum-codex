@@ -48,8 +48,11 @@ if (!fs.existsSync('data')) {
   fs.mkdirSync('data');
 }
 
-// Create default magazine data if it doesn't exist
+// Get current timestamp to force refresh
+const defaultDataVersion = new Date().getTime();
+// Create default magazine data if it doesn't exist or is outdated
 const defaultData = {
+  "version": defaultDataVersion,
   "issue_number": 126,
   "date": "2025-05-15",
   "title": "The GEN-R-L MiLLz Manifesto",
@@ -274,9 +277,27 @@ function adaptToLegacyFormat(data) {
 }
 
 const dataPath = path.join(__dirname, 'data', 'current_magazine_data.json');
-if (!fs.existsSync(dataPath)) {
+// Check if data file exists or should be updated to v0.3 format
+let shouldCreateDefault = true;
+
+if (fs.existsSync(dataPath)) {
+  try {
+    const existingData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+    // Only keep existing data if it has version field or is issue 126
+    if (existingData.version || existingData.issue_number === 126) {
+      shouldCreateDefault = false;
+    } else {
+      console.log('Existing magazine data is outdated, creating new version');
+    }
+  } catch (error) {
+    console.error('Error reading existing data file:', error);
+  }
+}
+
+if (shouldCreateDefault) {
+  // Force using new magazine data with navigation and layout
   fs.writeFileSync(dataPath, JSON.stringify(defaultData, null, 2));
-  console.log('Created default magazine data file');
+  console.log('Created default magazine data file with version:', defaultDataVersion);
 }
 
 // Routes
