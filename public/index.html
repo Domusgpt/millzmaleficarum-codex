@@ -8,6 +8,23 @@
     <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="navigation-toggle" id="navToggle">
+        <div class="nav-icon"></div>
+    </div>
+
+    <nav id="magazine-nav" class="magazine-nav">
+        <div class="nav-header">
+            <div class="nav-title">GEN‑R‑L MiLLz</div>
+            <div class="nav-subtitle">Navigation Nexus</div>
+        </div>
+        <ul class="nav-items" id="nav-items">
+            <!-- Navigation items will be loaded dynamically -->
+        </ul>
+        <div class="nav-footer">
+            <div class="sigil">Ω</div>
+        </div>
+    </nav>
+
     <div class="container">
         <header id="magazine-header">
             <h1 class="title">The GEN-R-L MiLLz Manifesto</h1>
@@ -43,12 +60,16 @@
                 <div class="footer-cell">© 2025</div>
             </div>
             <div class="mode-toggle">
+                <button id="refreshBtn">⟳ Refresh</button>
                 <button id="legacyModeBtn">Legacy Mode</button>
                 <button id="richModeBtn" class="active">Rich Mode</button>
+                <a href="/clear-cache.html" class="tool-link">Cache Tools</a>
             </div>
         </footer>
     </div>
 
+    <div id="hyperav-background" class="hyperav-container"></div>
+    <script src="hyperav.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

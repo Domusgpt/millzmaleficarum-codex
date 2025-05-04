@@ -175,14 +175,45 @@ fly secrets set KEY=VALUE
    - Delete app: `fly apps destroy your-app-name`
    - Start over with: `fly launch`
 
+5. **Content not updating after upload**:
+   - Clear browser cache or use the included cache tools
+   - Visit the cache utility page: `https://your-app-name.fly.dev/clear-cache.html`
+   - Restart the server: `fly machine restart`
+
+6. **Server returning old data**:
+   - Use the Refresh button on the main page
+   - Check server logs: `fly logs`
+   - Inspect the data files using SSH: `fly ssh console -c "cat /app/data/current_magazine_data.json"`
+
 ## Updating Your Application
 
 When you make changes to your code:
 
 1. Commit changes to your repository
-2. Run `fly deploy` to deploy the updated code
+2. Use the provided deploy script:
+   ```bash
+   ./deploy.sh
+   ```
+   Or run `fly deploy` manually to deploy the updated code
 
 The deployment process is fast and provides zero-downtime updates.
+
+## Using the Included Deploy Script
+
+For convenience, a deployment script is included:
+
+```bash
+# Make it executable first
+chmod +x deploy.sh
+
+# Run the deploy script
+./deploy.sh
+```
+
+This script will:
+1. Check if the Fly CLI is installed (installing if needed)
+2. Deploy your application to Fly.io
+3. Display the URL to access your application
 
 ## Next Steps
 

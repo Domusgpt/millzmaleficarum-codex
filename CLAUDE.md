@@ -2,51 +2,54 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## IMPORTANT: READ FIRST
-- **ALWAYS CHECK DEV-TRACKING.md** before making any changes to ensure you're aware of the current development status
-- Update DEV-TRACKING.md each time you modify files in this project with detailed notes
-- Review HYPERAV-INTEGRATION.md for plans to integrate the 4D visualizer
-- Run hyperav-sync.sh to synchronize HyperAV files from /storage/emulated/0/MillzMaleficarum_Codex_v0.1/HyperAV/
+## Project Status
+- **Current Version: 0.2** (Check DEV-TRACK.md for latest updates)
+- Recent updates include HyperAV integration, advanced CSS effects, and enriched JSON structure
+- The project is evolving from a basic magazine to a rich interactive digital publication
+
+## Development Goals
+- Transform into a full-featured digital magazine with advanced navigation
+- Implement multi-column layouts, pagination, and section linking
+- Enhance visual appeal with 3D effects, animations, and depth
+- Maintain JSON-driven content updates while expanding schema capabilities
+- Implement interactive elements (hover effects, reveals, audio)
+
+## Commands
+- Run locally: `./run-local.sh` or `npm start`
+- Deploy to Fly.io: `./fly-deploy.sh`
+- Sync HyperAV components: `./hyperav-sync.sh`
+- Lint shell scripts: `shellcheck filename.sh`
+
+## Code Style Guidelines
+- **JavaScript**:
+  - Use ES6+ features (arrow functions, template literals, etc.)
+  - Prefer functional patterns for data transformation
+  - Add JSDoc comments for function documentation
+  - Structure frontend code into clear component functions
+
+- **CSS**:
+  - Use CSS variables for consistent theming
+  - Implement responsive design with mobile-first approach
+  - Keep 3D transformations and animations organized
+  - Namespace classes based on functional areas
+
+- **JSON Schema**:
+  - Maintain backward compatibility with legacy format
+  - Use nested objects for structured content
+  - Include metadata for rendering instructions
+
+## Environment
+- Termux on Android with Ubuntu PRoot environment
+- Shared storage mounted at /mnt/shared
+- Fly.io for deployment with persistent storage
 
 ## Contact Information
 - Email: phillips.paul.email@gmail.com
 - GitHub: DomusGPT
+- Repository: https://github.com/DomusGPT/millzmaleficarum-codex
 
-## Environment
-- Termux on Android
-- Ubuntu PRoot environment (accessed via ubuntu-login.sh)
-- Shared storage mounted at /mnt/shared
-
-## Commands
-- To enter Ubuntu environment: `./ubuntu-login.sh`
-- For shell scripts: `shellcheck filename.sh` for linting
-- Android SDK commands should use the path to Android SDK in Termux
-
-## Fly.io Deployment
-- Fly.io CLI installed at `/root/.fly/bin/flyctl`
-- Add to PATH: `export FLYCTL_INSTALL='/root/.fly'`
-- Add to PATH: `export PATH="$FLYCTL_INSTALL/bin:$PATH"`
-- Run `fly auth signup` to create account
-- Run `fly launch` in project directory to start deployment
-
-## Code Style Guidelines
-- Shell scripts:
-  - Use 2-space indentation
-  - Comment complex operations
-  - Use lowercase for variable names
-  - Prefer double quotes for variables: "$variable"
-  - Include shebang line: #!/bin/bash or #!/bin/sh
-  
-## Repository Structure
-- Each project should have its own separate repository
-- Keep project-specific CLAUDE.md files in each project root
-- Use /storage/emulated/0/Claude Code for your main projects directory
-- Access shared Android storage via /mnt/shared when in Ubuntu environment
-
-## GitHub Repository
-- GitHub Username: DomusGPT
-- Primary Email: phillips.paul.email@gmail.com
-- Repository: https://github.com/Domusgpt/millzmaleficarum-codex
-- GitHub Pages: https://domusgpt.github.io/millzmaleficarum-codex/
-- Default Branch: master
-- CI/CD: GitHub Actions configured
+## Important Files
+- `server.js`: Express server with API endpoints
+- `public/script.js`: Frontend rendering logic
+- `public/style.css`: Styling with vaporwave aesthetic
+- `millz-magazine-issue*.json`: Example magazine content files

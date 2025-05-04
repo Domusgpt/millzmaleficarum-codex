@@ -163,8 +163,25 @@ app.get('/dashboard', (req, res) => {
 // API endpoint to get current magazine data
 app.get('/api/magazine-data', (req, res) => {
   try {
+    // Add cache control headers to prevent browser caching
+    res.setHeader('Cache-Control', 'no-store, max-age=0, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    
+    // Log the file path for debugging
+    console.log(`Reading magazine data from: ${dataPath}`);
+    
+    // Check if file exists
+    if (!fs.existsSync(dataPath)) {
+      console.error(`File not found at path: ${dataPath}`);
+      return res.status(404).json({ error: 'Magazine data file not found' });
+    }
+    
     const data = fs.readFileSync(dataPath, 'utf8');
+    console.log(`Successfully read ${data.length} bytes from file`);
+    
     const jsonData = JSON.parse(data);
+    console.log(`Magazine issue number: ${jsonData.issue_number}`);
     
     // Check if client supports new format (optional query param)
     const useNewFormat = req.query.format === 'rich';
@@ -179,7 +196,7 @@ app.get('/api/magazine-data', (req, res) => {
     }
   } catch (error) {
     console.error('Error reading magazine data:', error);
-    res.status(500).json({ error: 'Failed to read magazine data' });
+    res.status(500).json({ error: 'Failed to read magazine data', details: error.message });
   }
 });
 
@@ -190,9 +207,21 @@ app.post('/api/upload-magazine-data', upload.single('magazineData'), (req, res) 
       return res.status(400).json({ error: 'No file uploaded' });
     }
     
+    console.log(`Uploaded file saved to ${req.file.path}`);
+    
     // Validate JSON format
-    const data = fs.readFileSync(dataPath, 'utf8');
+    const data = fs.readFileSync(req.file.path, 'utf8');
+    console.log(`Read ${data.length} bytes from uploaded file`);
+    
     const jsonData = JSON.parse(data); // Will throw if invalid JSON
+    console.log(`Uploaded magazine issue number: ${jsonData.issue_number}`);
+    
+    // Create a backup of the current file
+    if (fs.existsSync(dataPath)) {
+      const backupPath = `${dataPath}.backup`;
+      fs.copyFileSync(dataPath, backupPath);
+      console.log(`Created backup at ${backupPath}`);
+    }
     
     // Validate based on format
     // Rich format validation
@@ -216,12 +245,34 @@ app.post('/api/upload-magazine-data', upload.single('magazineData'), (req, res) 
       throw new Error('Invalid magazine data format: must follow either rich or legacy format structure');
     }
     
-    res.json({ success: true, message: 'Magazine data updated successfully' });
+    // Ensure data directory exists
+    if (!fs.existsSync(path.dirname(dataPath))) {
+      fs.mkdirSync(path.dirname(dataPath), { recursive: true });
+      console.log(`Created directory ${path.dirname(dataPath)}`);
+    }
+    
+    // Copy validated file to final destination
+    fs.copyFileSync(req.file.path, dataPath);
+    console.log(`Copied validated file to ${dataPath}`);
+    
+    // Return success with info about the uploaded file
+    res.json({ 
+      success: true, 
+      message: 'Magazine data updated successfully',
+      details: {
+        issue_number: jsonData.issue_number,
+        date: jsonData.date,
+        title: jsonData.title || 'Unknown title'
+      }
+    });
   } catch (error) {
     console.error('Error processing upload:', error);
     // If upload fails, restore default data
     fs.writeFileSync(dataPath, JSON.stringify(defaultData, null, 2));
-    res.status(500).json({ error: 'Failed to process magazine data. Restored defaults.' });
+    res.status(500).json({ 
+      error: 'Failed to process magazine data. Restored defaults.', 
+      details: error.message 
+    });
   }
 });
 

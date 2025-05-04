@@ -4,15 +4,33 @@ This file tracks all development changes to the MillzMaleficarum Codex project.
 
 ## Latest Status
 
-- **Current Version**: v0.2
-- **Latest Feature**: HyperAV integration with micro-animations and hyperdimensional effects
+- **Current Version**: v0.3
+- **Latest Feature**: Fixed content upload and cache-related issues
 - **Static Demo Available**: https://domusgpt.github.io/millzmaleficarum-codex/
-- **Server Version**: Configured for Fly.io deployment
-- **Last Updated**: May 3, 2025
+- **Server Version**: Deployed at https://millzmaleficarum-codex.fly.dev
+- **Last Updated**: May 4, 2025
 - **Fly.io CLI**: Installed at `/root/.fly/bin/flyctl`
 - **HyperAV Integration**: Implemented in static demo with simplified visualization engine
 
 ## Development Timeline
+
+### May 4, 2025
+
+#### Content Update Issues Fixed (v0.3)
+- Fixed issues with content not updating after successful uploads
+- Added cache control headers to prevent browser caching
+- Added timestamp parameter to API requests to bust cache
+- Created cache-clearing utility page at `/clear-cache.html`
+- Enhanced error handling in API endpoints
+- Added refresh button to main UI
+- Improved file validation and logging
+- Files modified:
+  - `server.js` - Enhanced API endpoints with cache control headers
+  - `public/script.js` - Added cache-busting and improved error handling
+  - `public/index.html` - Added refresh button and cache tools link
+  - `public/style.css` - Added styles for new UI elements
+  - Created `public/clear-cache.html` - Utility for cache management
+  - Created `deploy.sh` - Simplified deployment script
 
 ### May 3, 2025
 
@@ -99,13 +117,19 @@ This file tracks all development changes to the MillzMaleficarum Codex project.
 
 ## Known Issues
 
-- None reported
+- Fixed: Content not updating after successful uploads (fixed in v0.3)
+- Fixed: Browser caching of API responses (fixed in v0.3)
 
 ## Notes for Next Development Session
 
-- Complete Fly.io deployment
-- Test content upload functionality on deployed server
+- ✅ Complete Fly.io deployment
+- ✅ Test content upload functionality on deployed server
+- ✅ Fix issue with content updates not appearing on the site
 - Consider adding authentication to dashboard
+- Add more advanced features to cache utility page:
+  - Add server status monitoring
+  - Add automated file validation
+  - Create direct data manipulation tools
 - Enhance HyperAV integration with additional features:
   - Add direct audio reactivity for immersive experience
   - Implement more pronounced reality distortion effects
