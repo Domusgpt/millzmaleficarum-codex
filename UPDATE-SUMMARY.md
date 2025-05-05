@@ -1,27 +1,46 @@
 # MillzMaleficarum Codex v0.3 Update Summary
 
-## Issue Fixed: Content Not Updating After Upload
+## Latest Update (May 5, 2025)
 
-This update fixes a critical issue where uploaded content was not being displayed on the site even after successful uploads. The root cause was a combination of browser caching, API response handling, and potential file system issues in the persistent storage.
+The most recent update includes all navigation system enhancements, advanced layouts, and improved visualization features. The application has been deployed to Fly.io with all features enabled and working correctly.
 
-## Changes Implemented
+## Current Deployment Status
+- **Version:** 0.3
+- **Deployment Date:** May 5, 2025
+- **URL:** https://millzmaleficarum-codex.fly.dev/
+- **Dashboard:** https://millzmaleficarum-codex.fly.dev/dashboard
 
-### Server-Side Changes
-1. **Enhanced API Endpoints**: Added cache control headers to prevent browser caching
-2. **Improved File Handling**: Added extensive validation and logging for file uploads
-3. **Error Handling**: Added detailed error reporting in API responses
-4. **File Management**: Added backup creation during file uploads
+## Major Features Added
 
-### Client-Side Changes
-1. **Cache Busting**: Added timestamp parameter to all API requests
-2. **Cache Control**: Added cache-busting headers to fetch requests
-3. **UI Enhancements**: Added Refresh button to main interface
-4. **Error Reporting**: Improved error messages displayed to users
+### Navigation System
+- Responsive sidebar navigation driven by JSON content
+- Section linking and navigation item generation
+- Mobile-friendly navigation toggle
+- Navigation transitions and animations
 
-### New Features
-1. **Cache Tools Utility**: Created `/clear-cache.html` for advanced cache management
-2. **Server Status Checker**: Added functionality to verify server connection
-3. **Deployment Script**: Simplified deployment with `deploy.sh`
+### Advanced Layouts
+- Multiple layout options: full-bleed, two-column, offset-grid, masonry
+- Multi-column text layouts with dynamic configuration
+- Layout selection based on JSON configuration
+- Responsive behavior across device sizes
+
+### Enhanced Visualization
+- Standalone hyperav.js for 4D visualization effects
+- Configurable patterns: tesseract, hypertetrahedra, tesseract_fold
+- JSON-driven visualization parameters
+- Improved performance with optimized rendering
+
+### 3D Depth Enhancements
+- Scroll reveal animations with Intersection Observer
+- Improved z-axis transformations for deeper layering
+- Floating element effects for dynamic page appearance
+- Enhanced perspective and 3D transformations
+
+### Cache & Content Update Fixes
+- **Enhanced API Endpoints**: Added cache control headers to prevent browser caching
+- **Improved File Handling**: Added extensive validation and logging for file uploads
+- **Cache Busting**: Added timestamp parameter to all API requests
+- **UI Enhancements**: Added Refresh button to main interface
 
 ## How to Deploy the Update
 
