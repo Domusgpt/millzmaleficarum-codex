@@ -3,53 +3,49 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Status
-- **Current Version: 0.2** (Check DEV-TRACK.md for latest updates)
-- Recent updates include HyperAV integration, advanced CSS effects, and enriched JSON structure
-- The project is evolving from a basic magazine to a rich interactive digital publication
-
-## Development Goals
-- Transform into a full-featured digital magazine with advanced navigation
-- Implement multi-column layouts, pagination, and section linking
-- Enhance visual appeal with 3D effects, animations, and depth
-- Maintain JSON-driven content updates while expanding schema capabilities
-- Implement interactive elements (hover effects, reveals, audio)
+- **Current Version: 0.3** (See DEV-TRACK.md for latest updates)
+- Digital magazine with advanced navigation, enhanced layouts, and HyperAV integration
 
 ## Commands
-- Run locally: `./run-local.sh` or `npm start`
-- Deploy to Fly.io: `./fly-deploy.sh`
-- Sync HyperAV components: `./hyperav-sync.sh`
-- Lint shell scripts: `shellcheck filename.sh`
+- **Run locally**: `npm start` or `./run-local.sh`
+- **Deploy to Fly.io**: `./fly-deploy.sh`
+- **HyperAV integration**: `./hyperav-sync.sh` 
+- **Lint shell scripts**: `shellcheck filename.sh`
+- **Test**: Run `npm test` (no tests specified yet)
 
 ## Code Style Guidelines
 - **JavaScript**:
-  - Use ES6+ features (arrow functions, template literals, etc.)
-  - Prefer functional patterns for data transformation
-  - Add JSDoc comments for function documentation
-  - Structure frontend code into clear component functions
+  - Use ES6+ features (arrow functions, template literals, destructuring)
+  - Prefer functional programming patterns for data transformation
+  - Add JSDoc comments for documentation (`@param`, `@returns`)
+  - Handle errors with try/catch blocks and detailed error messages
+  - Use camelCase for variables and functions, PascalCase for classes
+  - Create clearly named component functions for UI elements
 
 - **CSS**:
-  - Use CSS variables for consistent theming
-  - Implement responsive design with mobile-first approach
-  - Keep 3D transformations and animations organized
-  - Namespace classes based on functional areas
+  - Use CSS variables for theming (defined in `:root`)
+  - Follow mobile-first responsive design principles
+  - Namespace classes by section (e.g., `editorial-section`, `tech-content`)
+  - Organize 3D transformations and animations into logical groups
 
-- **JSON Schema**:
-  - Maintain backward compatibility with legacy format
-  - Use nested objects for structured content
-  - Include metadata for rendering instructions
+- **HTML/JSON**:
+  - Use semantic HTML5 elements
+  - Structure JSON with nested objects for better organization
+  - Include metadata and configuration in JSON for rendering instructions
+  - Maintain backward compatibility with legacy formats
 
-## Environment
-- Termux on Android with Ubuntu PRoot environment
-- Shared storage mounted at /mnt/shared
-- Fly.io for deployment with persistent storage
+## Error Handling
+- Server: Use try/catch blocks with detailed error logging
+- Client: Implement graceful degradation with user-friendly error messages
+- JSON parsing: Validate content structure before rendering
 
-## Contact Information
-- Email: phillips.paul.email@gmail.com
-- GitHub: DomusGPT
-- Repository: https://github.com/DomusGPT/millzmaleficarum-codex
+## Imports
+- Group imports by type (core modules, npm packages, local modules)
+- Use destructuring for specific imports where applicable
+- Avoid wildcard imports
 
 ## Important Files
-- `server.js`: Express server with API endpoints
-- `public/script.js`: Frontend rendering logic
-- `public/style.css`: Styling with vaporwave aesthetic
-- `millz-magazine-issue*.json`: Example magazine content files
+- `server.js`: Express API server with magazine data endpoints
+- `public/script.js`: Frontend rendering with layout and navigation
+- `public/style.css`: CSS with advanced 3D effects and responsive design
+- `public/hyperav.js`: 4D visualization engine integration
