@@ -1,0 +1,28 @@
+{
+  "name": "millzmaleficarum_codex_v0.1",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"No tests specified yet\" && exit 0"
+  },
+  "keywords": [
+    "magazine",
+    "digital",
+    "vaporwave",
+    "node",
+    "express"
+  ],
+  "author": "GEN-R-L MiLLz",
+  "license": "ISC",
+  "description": "A dynamic, JSON-driven digital magazine with a Vaporwave/Cryptic/Sacred Tech aesthetic",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "multer": "^1.4.5-lts.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "title": "MillzMaleficarum Codex",
+  "issue": "v0.1",
+  "theme": "vaporwave",
+  "sections": [
+    {
+      "title": "Welcome to the Codex",
+      "content": "Welcome to the MillzMaleficarum Codex, a hyperbolic info hagiography about GEN-R-L MiLLz. This digital artifact preserves the sacred wisdom of computational enchantment and digital mysticism.",
+      "style": "centered"
+    },
+    {
+      "title": "The Digital Scriptorium",
+      "content": "In the vast digital wasteland, the Codex serves as a beacon of hyperreality - a place where information transcends mere data to become divine revelation. Navigate these virtual pages with reverence for the encoded mysteries within.",
+      "style": "glitched"
+    },
+    {
+      "title": "Vaporwave Aesthetics",
+      "content": "The aesthetic choice of vaporwave represents the intersection of nostalgia and futurism - a digital paradox where retro computing meets advanced AI. Within this stylistic framework, we explore the liminal spaces between human creativity and machine precision.",
+      "style": ""
+    },
+    {
+      "title": "Technical Specifications",
+      "content": "This Codex is powered by Node.js/Express backend with a vanilla JS frontend. Content is dynamically loaded from JSON configuration, allowing for rapid updates and evolution of the digital manuscript.",
+      "style": ""
+    }
+  ]
+}

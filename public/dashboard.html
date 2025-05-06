@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MillzMaleficarum Codex - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Dashboard specific styles */
+        .dashboard-container {
+            background: rgba(0, 0, 60, 0.5);
+            padding: 2rem;
+            border: 1px solid var(--accent1);
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            text-align: center;
+            text-transform: uppercase;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent2);
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-input {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--accent1);
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--text);
+            cursor: pointer;
+        }
+        
+        .file-input::file-selector-button {
+            background: var(--background);
+            color: var(--accent2);
+            border: 1px solid var(--accent1);
+            padding: 0.5rem 1rem;
+            margin-right: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .file-input::file-selector-button:hover {
+            background: var(--accent1);
+            color: var(--background);
+        }
+        
+        .button {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(45deg, var(--accent1), var(--accent2));
+            color: var(--background);
+            border: none;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.9rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--accent1);
+        }
+        
+        .button:active {
+            transform: translateY(1px);
+        }
+        
+        .status-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+        
+        .status-success {
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
+            border-left: 3px solid #00ff00;
+            opacity: 1;
+        }
+        
+        .status-error {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff6666;
+            border-left: 3px solid #ff0000;
+            opacity: 1;
+        }
+        
+        .current-data {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px dashed var(--accent1);
+        }
+        
+        .current-data-title {
+            margin-bottom: 1rem;
+            color: var(--accent2);
+            font-size: 1.2rem;
+        }
+        
+        .data-display {
+            font-family: monospace;
+            white-space: pre-wrap;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            color: var(--text);
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid var(--accent1);
+        }
+        
+        .nav-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent2);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent2);
+            padding-bottom: 0.2rem;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent1);
+            border-bottom-color: var(--accent1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header id="magazine-header">
+            <h1 class="title">MillzMaleficarum Codex</h1>
+            <p class="issue">Dashboard</p>
+        </header>
+
+        <main>
+            <div class="dashboard-container">
+                <h2 class="dashboard-title">Update Magazine Content</h2>
+                
+                <form id="upload-form">
+                    <div class="form-group">
+                        <label for="magazine-file">Upload JSON Configuration File:</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="magazine-file" name="magazineData" accept=".json" class="file-input">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="button">Upload & Update</button>
+                </form>
+                
+                <div id="status-message" class="status-message"></div>
+            </div>
+            
+            <div class="current-data">
+                <h3 class="current-data-title">Current Magazine Data:</h3>
+                <div id="current-data" class="data-display">Loading current data...</div>
+            </div>
+            
+            <a href="/" class="nav-link">← View Magazine</a>
+        </main>
+
+        <footer>
+            <div class="footer-grid">
+                <div class="footer-cell">GEN-R-L MiLLz</div>
+                <div class="footer-cell">Hyperbolic Info Hagiography</div>
+                <div class="footer-cell">Sacred Tech</div>
+                <div class="footer-cell">© 2025</div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
